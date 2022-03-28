@@ -29,3 +29,8 @@ DOCA_PUB
 │   └── 
 └── index.html
 ``` 
+
+## 퍼블리싱 전체 진행사황
+해당 `DOCA_FILE-list.html`폴더에서 확인
+
+![퍼블리싱 내용](/assets/images/common/pub_process.png)
