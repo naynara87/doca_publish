@@ -1,0 +1,28 @@
+//
+// main
+//
+
+$maincolor: #333333;
+$titlecolor: #222222;
+$linkcolor: #222222;
+$mainfontsize: 16px;
+$titlefontsize: ($mainfontsize * 2);
+$baseUrl: '/assets/';
+$radius:10px;
+
+@mixin titleborder{
+    border-left : 5px solide red;
+    padding-left : 5px solide red;
+}
+
+body{
+    color: $maincolor;
+    font-size:  $mainfontsize;
+    width: 100%;
+    min-width: 1024px;
+}
+
+.main-contents{
+    width: calc( 100% - 510px );
+    // padding-left: 250px;
+}

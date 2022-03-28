@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="DOCA">
+    <meta name="keywords" content="DOCA">
+    <meta name="author" content="BUBBLECON">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>DOCA</title>
+    <!-- Fevicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="assets/css/fontello.css"/>
+    <!-- plugin css -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/js/plugins/jquery-ui/jquery-ui.min.css"> -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/plugins/select2/select2.min.css">
+    
+    <!-- Start css -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    
+    <style>
+        
+        *{
+            font-weight: 400;
+        }
+        ul{
+            padding: 0;
+            list-style: none;
+        }
+        button{
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+        }
+        #containerbar{
+            display: flex;
+        }
+        a.btn__dropdown {
+            color: #222;
+        }
+        a.btn__dropdown:hover,a.btn__dropdown:active,a.btn__dropdown:focus {
+            color: #222;
+        }
+        .contentbar{padding:0px}
+        .aside-right{
+            width: 300px;
+            background: #fff;
+            border-left: 1px solid #EBEBEB;
+        }
+        
+        .aside-right.min-size{
+            width: 60px;
+            /* overflow: hidden; */
+        }
+        
+        .aside-right.min-size .doca__detail{
+            display:none
+        }
+        .aside-right.min-size .doca__detail{
+            display:none
+        }
+        .leftbar{
+            width: 260px;
+            background: #FAFAFC;;
+            border-right: 1px solid #EBEBEB;
+            background:#fff;
+            z-index: 1;
+        }
+        .leftbar.min-size{
+            overflow: hidden;
+            width: 60px;
+        }
+        .unfold .doca-fold:before { content: '\e804'; }
+        .sidebar{
+            width: 260px;
+        }
+        .leftbar.min-size .sidebar{
+            width: 60px;
+        }
+        .leftbar.min-size .sidebar .vertical__menu__detail{
+            display: none;
+        }
+        .vertical__menu__detail{
+            position: relative;
+            height: 100%;
+        }
+        .tab__content{
+            height: calc( 100% - 400px );
+            overflow: hidden;
+        }
+        .btn__filemanage{
+            display: block;
+            width:100%;
+            background:#066AFF;
+            color:#FFFFFF;
+            padding: 15px 20px;
+            border: none;
+            font-size: 14px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        .tab__wrapper{
+            text-align: center;
+            padding: 10px 30px;
+        }
+        .logobar{
+            padding: 30px 30px 10px;
+            text-align: left;
+        }
+        .logobar .img__fluid{
+            width: 100%;
+            max-width: 180px;
+        }
+        .footerbar {
+            padding: 10px 0px;
+            text-align: center;
+            background-color: transparent;
+            margin-top: auto;
+        }
+        .vertical__menu{
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            overflow-y: auto;
+        }
+        .vertical__menu li a{
+            width: 100%;
+            font-size: 16px;
+            color: #222;
+            text-decoration: none;
+            font-weight: 400;
+            padding: 10px 35px;
+            display: block;
+            box-sizing: border-box;
+        }
+        .vertical__menu li a .doca-arrow-right-s-fill::before{
+            color:#BDBDBD;
+        }
+        .vertical__menu > li.active > a{
+            font-weight: bold;
+            color: #066AFF;
+        }
+        
+        .vertical__menu > li.active > a > .doca-arrow-right-s-fill::before{
+            transform:rotate(90deg);
+            color: #066AFF;
+        }
+
+        .vertical__menu > li .vertical__2dpt{
+            display:none;
+            list-style: none;
+            padding:0;
+        }
+        .vertical__menu > li .vertical__2dpt li a{
+            padding-left: 50px;
+        }
+        .vertical__menu > li .vertical__3dpt{
+            display:none;
+            list-style: none;
+            padding:0;
+        }
+        .vertical__menu > li .vertical__3dpt li a{
+            padding-left: 80px;
+        }
+        .vertical__menu > li.active .vertical__2dpt.in{
+            display:block;
+            background:#fff;
+        }
+        .vertical__menu > li.active .vertical__3dpt.in{
+            display: block;
+        }
+        /* 메인콘텐츠 */
+        .main-contents{
+            /* padding-left: 260px; */
+            width: calc(100% - 560px);
+            flex: 1;
+        }
+        .main-contents.expanded-left{
+            /* padding-left: 60px; */
+            width: calc(100% - 360px);
+        }
+        .main__header-top{
+            padding:20px 15px 0;
+        }
+        .main__header{
+            display:flex;
+            align-items:center;
+            justify-content: space-between;
+            padding:5px 30px;
+        }
+        .main__header h2{
+            font-size: 24px;
+            margin:0;
+        }
+        .search__bar{
+            display:flex;
+            width: 100%;
+            padding:5px 30px;
+            box-sizing: border-box;
+        }
+        .search__bar input{
+            flex:1;
+            padding:10px;
+            border:1px solid #EFEFEF;
+            border-radius: 0;
+            background-color:#EFEFEF;
+            font-size: 14px;
+        }
+        .search__bar input:active,.search__bar input:hover,.search__bar input:focus{
+            border-color:#569FEC;
+        }
+        .search__bar input::placeholder{
+            color:#B5B5B5;
+        }
+
+        .btn__doca{
+            display: block;
+            border-radius: 0;
+            padding:.5rem 1rem;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn__default{
+            background-color:transparent;
+            border: none;
+            color:#222;
+            transition:.2s linear
+        }
+        .btn__default:hover{
+            background-color:#EFEFEF;
+        }
+        .btn__icon{
+            background-color:transparent;
+            border: none;
+            transition:.2s linear;
+            width: 40px;
+            /* width: calc(1.35em + 1.1rem); */
+            height: 40px;
+            /* height: calc(1.35em + 1.1rem); */
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .btn__icon:hover{
+            background-color:#d5d5d58e;
+        }
+        .btn__white{
+            color:#fff;
+            transition: 0.1s linear;
+        }
+        .btn__white:hover{
+            opacity: .5;
+        }
+        .btn__primary{
+            background-color:#569FEC;
+            border: 1px solid #569FEC;
+            color:#fff;
+            transition:.1s linear;
+        }
+        .btn__primary:hover{
+            background-color:#438bd8;
+            border: 1px solid #438bd8;
+            /* box-shadow:inset 1px 1px 6px #333; */
+        }
+        .btn__primary2{
+            background-color:#0046AE;
+            border: 1px solid #0046AE;
+            color:#fff;
+            transition:.1s linear;
+        }
+        .btn__primary2:hover{
+            background-color:#033b8e;
+            border: 1px solid #033b8e;
+            /* box-shadow:inset 1px 1px 6px #333; */
+        }
+        .btn__primary3{
+            background-color:#066AFF;
+            border: 1px solid #066AFF;
+            color:#fff;
+            transition:.1s linear;
+        }
+        .btn__primary3:hover{
+            background-color:#0149b6;
+            border: 1px solid #0149b6;
+            /* box-shadow:inset 1px 1px 6px #333; */
+        }
+        .btn__primary-border{
+            background-color:transparent;
+            border: 1px solid #066AFF;
+            color:#066AFF;
+            transition:.1s linear;
+        }
+        .btn__primary-border:hover{
+            background-color:#066AFF;
+            border: 1px solid #066AFF;
+            color:#fff;
+        }
+        .btn__gray-border{
+            background-color:transparent;
+            border: 1px solid #C4C4C4;
+            color:#222;
+            transition:.1s linear;
+        }
+        .btn__gray-border:hover{
+            box-shadow:inset 2px 2px 3px #ddd;
+        }
+        .btn__upgrade{
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #066AFF;
+            color: #066AFF;
+            padding: 4px 13px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .btn__block{
+            display:block
+        }
+        .btn__user-info{
+            background-color:#E5F0FF;
+            text-align:center;
+            border-radius: 20px;
+            border: 0;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: box-shadow .1s linear;
+        }
+        .btn__user-info:hover{
+            border:1px solid #066AFF;
+            box-shadow: 0 0 0 3px rgba(0, 72, 255, 0.25);
+        }
+        .btn__user-info span{
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .btn-column{
+            flex-direction: column;
+        }
+        
+        
+        .search__results-buttons{
+            padding: 8px 30px 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .btn__group{
+            display:flex;
+            gap: 5px;
+        }
+        .ml-auto{
+            margin-left: auto;
+        }
+        .mt-1{
+            margin-top: 10px;
+        }
+        .ml-3{
+            margin-left: 30px;
+        }
+        .w-100{
+            width: 100%;
+        }
+        .text-right{
+            text-align: right;
+        }
+        .search__results-warp{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            /* height: calc(100vh - 220px); */
+            overflow-y: auto;
+        }
+        .search__results{
+            padding: 5px 30px;
+            display:flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .doca__card{
+            position: relative;
+            width: 250px;
+            border: 1px solid #D7D7D7;
+            box-sizing: border-box;
+        }
+        .doca__card.active{
+            border: 1px solid #066AFF;
+            box-shadow: 0 0 0 3px rgba(0, 72, 255, 0.25);
+        }
+        .doca__card .doca__card-header{
+            display:none;
+        }
+        .doca__card:hover .doca__card-header{
+            display:flex;
+        }
+        .doca__card.active .doca__card-header{
+            display:flex;
+        }
+        .doca__card-header{
+            display:flex;
+            align-items: center;
+            justify-content: space-between;
+            padding:5px;
+            position: absolute;
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 10px;
+        }
+        .doca__card-header:hover{
+            
+        }
+        /* checkbox */
+        .doca__card-header input{
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            box-sizing: border-box;
+            padding: 0;
+        }
+        .control__check{
+            height: 20px;
+            width: 20px;
+            background: #fff;
+            border: 1px solid #066AFF;
+            display: block;
+            position: relative;
+        }
+        .control__check:after{
+            content: '';
+            position: absolute;
+            display: none;
+        }
+        .control__check:after {
+            position: absolute;
+            top: 2px;
+            left: 6px;
+            width: 6px;
+            height: 9px;
+            border: solid #066AFF;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        input:checked ~ .control__check{
+            background: #E5F0FF;
+            border: 1px solid #066AFF;
+        }
+        input:checked ~ .control__check:after{
+            display: block;
+        }
+
+        /* imgbox */
+        .doca__card-img{
+            width: 100%;
+            height: 162px;
+        }
+        .doca__card-img img{
+            width: 100%;
+            height: 162px;
+        }
+        .doca__card-title{
+            font-size: 18px;
+            margin: 0;
+            padding: 15px 10px 10px;
+            overflow: hidden;
+            height: 46px;
+            margin-bottom: 4px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .doca__card-title::before{
+            content: "P";
+            background-color:#DB4882;
+            color:#fff;
+            text-align: center;
+            display: inline-block;
+            width:22px;
+            height:22px;
+            line-height:22px;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        .tag__group{
+            padding:5px 10px;
+            display:flex;
+            gap: 5px;
+        }
+        .tag{
+            font-size: 12px;
+            background:#E6F0FF;
+            padding:.2rem .7rem;
+            font-weight: bold;
+            color:#0066FF;
+            border:1px solid #E6F0FF;
+            border-radius: 15px;
+        }
+        .tag-more{
+            font-size: 12px;
+            padding:.2rem .7rem;
+            font-weight: bold;
+            border:1px solid #0066FF;
+            color:#0066FF;
+            border-radius: 15px;
+            cursor: pointer;
+            min-width: 20px;
+            text-align: center;
+        }
+        .tag-more:hover{
+            background:#0066FF;
+            color: #fff;
+        }
+        .doca__card-info{
+            margin: 0;
+            padding: 5px 10px;
+            list-style: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .doca__card-info label{
+            color: #909090;
+            padding-right: 5px;
+            width: 43px;
+            display: inline-block;
+        }
+        .doca__card-info label + span{
+            color: #222;
+        }
+
+        .doca__card-footer{
+            border-top: 1px solid #D7D7D7;
+            display:flex;
+        }
+        .doca__card-footer .btn__download{
+            flex: 1;
+            border: 0;
+            background: transparent;
+            padding: 0.6rem 1rem;
+            font-size: 16px;
+            transition:.1s linear;
+            border-right: 1px solid #D7D7D7;
+        }
+        .doca__card-footer .btn__download:hover{
+            background:#066AFF;
+            color: #fff;
+        }
+        .doca__card-footer .btn__search{
+            background:#E6F0FF;
+            font-size: 16px;
+            border: 0;
+            color: #066AFF;
+            transition:.1s linear;
+        }
+        .doca__card-footer .btn__search:hover{
+            background:#066AFF;
+            color: #fff;
+        }
+
+        /* user info */
+        .doca__user-info{
+            border-bottom: 1px solid #EBEBEB;
+            /* width: 300px; */
+            box-sizing:border-box;
+        }
+        .doca__user-info .btn__group{
+            padding: 10px;
+        }
+        .aside-right.min-size .doca__user-info .btn__group{
+            padding: 10px;
+        }
+        .aside-right.min-size .doca__user-info .btn__setting,
+        .aside-right.min-size .doca__user-info .btn__alram{
+            display: none;
+        }
+        .btn__group.btn__align-right{
+            justify-content: end;
+            position: relative;
+        }
+        .btn__group.btn__align-center{
+            justify-content: center;
+        }
+        .doca__detail{
+            padding: 10px 0;
+        }
+        .doca__detail-header{
+            display: flex;
+            border-bottom: 1px solid #EBEBEB;
+            align-items: center;
+            padding: 0 10px;
+            padding-bottom: 8px;
+        }
+        .doca__detail-header .doca__detail-title{
+            flex:1;
+            font-size: 18px;
+            margin:0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .doca__detail-warp{
+            overflow-y: auto;
+            height: calc(100vh - 155px);
+            padding: 0 18px 17px;
+        }
+        .doca__detail-warp .doca__detail-sub-title{
+            margin: 0;
+            font-size: 16px;
+            padding: 20px 0px 5px;
+        }
+        .doca__detail-info{
+            margin: 0;
+            padding: 10px 0px;
+            list-style: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .doca__detail-info label{
+            color: #909090;
+            padding-right: 5px;
+            width: 43px;
+            display: inline-block;
+        }
+        .doca__detail-info label + span{
+            color: #222;
+        }
+        .keyword__group{
+            display:flex;
+            flex-wrap: wrap;
+            gap:8px 6px;
+            padding: 0;
+            margin: 0;
+            line-height:2;
+            padding:5px 0;
+            list-style: none;
+        }
+        .btn__keyword{
+            border: 1px solid #066AFF;
+            border-radius:30px;
+            padding: .2em 1em;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .1s linear;
+        }
+        .btn__keyword.on{
+            background-color: #E6F0FF
+        }
+        .btn__keyword:hover{
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn__alram{
+            position: relative;
+        }
+        .btn__alram::after{
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 8px;
+            background-color:red;
+            color: #fff;
+            font-size: 8px;
+            position: absolute;
+            top: 6px;
+            left: 6px;
+        }
+        .doca__detail-tags{
+            display: flex;
+            gap:5px;
+            flex-wrap: wrap;
+            padding:5px 0
+        }
+        .doca__detail-tags.tags__edit .tag{
+            transition:.2s linear
+        }
+        .doca__detail-tags.tags__edit .tag:hover{
+            background-color:rgb(255, 213, 213);
+            border-color:rgb(255, 213, 213);
+            color:red;
+            cursor: default;
+            transform:scale(1.05);
+        }
+        .doca__detail-tags.tags__edit .tag:after{
+            content:"\e813";
+            width:50px;
+            margin-left:5px;
+            cursor: pointer;
+        }
+        .input__file-info{
+            display: block;
+            width: 100%;
+            border: 0;
+            box-sizing: border-box;
+        }
+        .input__file-info::placeholder{
+            font-size: 12px;
+        }
+        .input__file-info:focus{
+            border: 1px solid #066AFF;
+            font-size: 16px;
+            padding: 0.4em 0.6em;
+        }
+
+        .doca__min-detail-bar{
+            display: none;
+            justify-content: center;
+            padding: 10px;
+        }
+        .doca__min-detail-bar.on{
+            display:flex;
+            flex-direction: column;
+        }
+
+        /* 툴팁 스타일 */
+        .ui-tooltip {
+            background-color:#222;
+            color:#fff;
+            font-weight:400;
+            font-size: 14px;
+            padding:.3em .6em;
+            border-radius: 0;
+        }
+        .ui-widget.ui-widget-content {
+            border: 1px solid #222;
+        }
+        .ui-widget-shadow{
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        /* 셀렉트 스타일 */
+        .select2-container{
+            min-width: 100px;
+        }
+        .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            border: 1px solid #C4C4C4;
+            border-radius: 0px;
+            font-weight: 400;
+            font-size: 16px;
+        }
+        .select2-container .select2-selection--single{
+            height: 37px;
+        }
+        .select2-container--default.select2-container--open.select2-container--below .select2-selection--single, 
+        .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple{
+            background-color: #fff;
+            border: 1px solid #C4C4C4;
+            border-radius: 0;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered{
+            color: #222;
+            line-height: 35px;
+            padding: 0 1rem;
+            height: 35px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow{
+            height: 35px;
+        }
+        .select2-dropdown{
+            border-radius: 0;
+            font-weight: 400;
+            color:#222;
+        }
+        .select2-container--default .select2-results__option[aria-selected=true]{
+            background-color: #E5F0FF;
+            color:#222;
+        }
+        .select2-results__option{
+            padding: .3em 1rem;
+        }
+        .dropdown__box{
+            position: relative;
+            display: block;
+        }
+        .dropdown__menu{
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + 5px);
+            border: 1px solid #C4C4C4;
+            background: #fff;
+            z-index: 2;
+            padding: .2em 0;
+            margin: 0;
+            list-style: none;
+            min-width: 100px
+        }
+        .dropdown__menu.show{ 
+            display:block; 
+        }
+        .dropdown__menu li{
+            padding: .5rem 1rem;
+            padding-right: 0.7rem;
+        }
+        .dropdown__menu li:hover{
+            background: #EFEFEF;
+        }
+        .dropdown__menu li a{
+            text-decoration: none;
+            color: #222;
+            display:flex;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        .dropdown__menu li a span{
+            flex:1
+        }
+
+        /* doca table style */
+        .doca__table{
+            width:100%;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 400;
+            color: #000
+        }
+        .doca__table thead tr{
+        }
+        .doca__table thead tr th{
+            padding:.5em 1em;
+            border-bottom: 1px solid #C4C4C4;
+        }
+        .doca__table tbody tr td{
+            padding:.5em 1em;
+            border-bottom: 1px solid #E5E5E5;
+            color: #4D4D4D
+        }
+        .doca__table tbody tr td.table__option-right{
+            text-align: right;
+        }
+        .user__menu-drop{
+            position: absolute;
+            background: #fff;
+            list-style: none;
+            width: 240px;
+            right: 10px;
+            top: 39px;
+            border: 1px solid #ddd;
+            padding: 0;
+            display: none;
+            z-index: 9;
+        }
+        .user__menu-drop.show {
+            display: block;
+        }
+        .user__menu-drop li{
+            padding:5px 20px;
+            border-bottom: 1px solid #ddd;
+            color: #222;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        .user__menu-drop li .user__menu-item{
+            padding:6px 0px;
+        }
+        .user__menu-drop li .user__menu-item a{
+            display: block;
+            text-decoration: none;
+        }
+        .user__profile-img{
+            background: rgb(255, 179, 179);
+            width: 40px;
+            height: 40px;
+            display: block;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+        .user__profile-img span{
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .user__profile-info{
+            padding-left: 10px
+        }
+        .user__profile-info span{
+            display: block;
+        }
+        .dflex{
+            display: flex;
+        }
+        .user__alam-box{
+            display: none;
+            position: absolute;
+            background: #fff;
+            list-style: none;
+            width: 300px;
+            right: 10px;
+            top: 55px;
+            border: 1px solid #ddd;
+            color:#222;
+            padding: 0;
+            font-weight: 400;
+        }
+        .user__alam-box.show{
+            display: block;
+        }
+        .user__alam-box .user__alam-box-header{
+            display: flex;
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+            align-items: end;
+        }
+        .user__alam-box ul{
+            padding: 0;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            list-style: none;
+        }
+        .user__alam-box ul li{
+            padding: 10px 15px;
+            font-size: 13px;
+            border-bottom: 1px dashed #ddd;
+        }
+        .user__alam-box ul li:last-child{
+            border-bottom: 0;
+        }
+        .user__alam-box ul li:hover{
+            background-color: #efefef;
+        }
+        .user__alam-box span{
+            font-size: 13px;
+            color: #555;
+        }
+        .user__alam-box span.title{
+            flex:1;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .text__gray{
+            color: #555;
+            margin: 5px 0;
+        }
+        /* 모달창 */
+        .doca__modal{
+            display:none;
+            position: absolute;
+            background:rgba(0,0,0,0.5);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 99;
+            box-sizing: border-box;
+            padding:15px;
+            align-items: center;
+            justify-content: center;
+        }
+        .doca__modal.show{
+            display:flex;
+        }
+        .doca__modal-content{
+            background:#fff;
+            max-width: 1000px; 
+            width: 100%;
+            height: auto;
+            /* position: absolute;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%,-50%); */
+        }
+        .doca__modal-header{
+            background:#293B71;
+            color: #fff;
+            font-size: 16px;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .doca__modal-body{
+            padding: 1em 1.5em 0;
+            overflow: auto;
+        }
+        .doca__modal-footer{
+            display: flex;
+            justify-content: end;
+            padding: 0 1.5em 2em;
+            padding-top: 0;
+            gap:5px;
+        }
+        .search__form{
+            color: #222
+        }
+        .search__form li{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 1em 0;
+            border-bottom: 1px solid #efefef;
+        }
+        .search__form li:last-child{
+            border-bottom:0
+        }
+        .search__form li label.title{
+            width: 85px;
+            display: inline-block;
+            margin-right: 15px;
+        }
+        .search__form li label:nth-child(2).title{
+            text-align: right;
+        }
+        .form__control{
+            background-color: #fff;
+            border: 1px solid #C4C4C4;
+            border-radius: 0px;
+            font-weight: 400;
+            font-size: 16px;
+            padding: 0 1rem;
+            height: 35px;
+            flex:1;
+            flex-basis: auto;
+        }
+        .input__group-column{
+            display:flex;
+            flex-direction: column;
+            gap:5px;
+            flex:1;
+        }
+        .input__group{
+            display:flex;
+            gap:5px;
+            align-items:center;
+        }
+        .check__group{
+            height:35px;
+            line-height: 35px;
+        }
+        .check__group > label{
+            padding-right:15px
+        }
+
+        /* 저장용량 */
+        .storage__capacity{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 2em 25px;
+            box-sizing: border-box;
+        }
+        .storage__capacity h5{
+            margin: 0;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .storage__capacity-progress{
+            width: 100%;
+            display: block;
+            background: #ddd;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .storage__capacity-progress-bar{
+            background:  linear-gradient(180deg, #003990 -38.89%, rgba(153, 194, 255, 0.96) 1.46%, #2485EB 59.5%, #0046AE 150%);
+            height: 10px;
+            border-radius: 5px;
+            width: 0;
+        }
+        .storage__info{
+            color: #293B71;
+            display: block;
+            font-size: 14px;
+            margin: 5px 0 10px;
+        }
+        
+        /* search 창 */
+        .no-result{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: calc(100vh - 416px);
+            font-size: 16px;
+            color: #222;
+            font-weight: 500;
+            flex-direction: column;
+        }
+        .keyword__hightlight{
+            color: red;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 991px) {
+            .search__form li{
+                flex-wrap: wrap;
+            }
+            .text-sm-left{
+                text-align:left;
+            }
+            .input__group{
+                width:100%;
+            }
+            .search__form li label.title{
+                margin-right: 0;
+            }
+        }
+        @media (max-width: 768px) {
+            .search__form li{
+                flex-wrap: wrap;
+            }
+            .text-sm-left{
+                text-align:left;
+            }
+            .input__group{
+                width:100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <body>
+        <div id="containerbar">
+            <div class="leftbar">
+                <!-- Start Sidebar -->
+                <div class="sidebar">
+                    <!-- Start Navigationbar -->
+                    <div class="navigationbar">
+                        <!-- <div class="vertical-menu-icon" style="display: none;">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <div class="logobar">
+                                    <a href="index.html" class="logo logo-small"><img src="assets/images/small_logo.svg" class="img-fluid" alt="logo"></a>
+                                </div>
+                                <a class="nav-link"><img src="assets/images/svg-icon/crm.svg" class="img-fluid" alt="CRM" data-toggle="tooltip" data-placement="top" title="CRM"></a>
+                                <a class="nav-link"><img src="assets/images/svg-icon/ecommerce.svg" class="img-fluid" alt="eCommerce" data-toggle="tooltip" data-placement="top" title="eCommerce"></a>
+                                <a class="nav-link"><img src="assets/images/svg-icon/hospital.svg" class="img-fluid" alt="Hospital" data-toggle="tooltip" data-placement="top" title="Hospital"></a>
+                                <a class="nav-link"><img src="assets/images/svg-icon/ui-kits.svg" class="img-fluid" alt="UI Kits" data-toggle="tooltip" data-placement="top" title="UI Kits"></a>
+                                <a class="nav-link"><img src="assets/images/svg-icon/pages.svg" class="img-fluid" alt="Pages" data-toggle="tooltip" data-placement="top" title="Pages"></a>
+                            </div>
+                        </div> -->
+                        <div class="vertical__menu__detail">
+                            <div class="logobar">
+                                <a href="index.html" class="logo logo-large">
+                                    <img src="./assets/images/common/logo.png" class="img__fluid" alt="logo">
+                                </a>
+                            </div>
+                            <div class="tab__wrapper">
+                                <button class="btn__filemanage">파일관리</button>
+                            </div>
+                            <div class="tab__content">
+                                <ul class="vertical__menu">
+                                    <li>
+                                        <a href="javaScript:void();">
+                                            <!-- <img src="assets/images/svg-icon/basic.svg" class="img-fluid" alt="아이콘"> -->
+                                            <i class="doca-arrow-right-s-fill"></i>  <span>병합파일</span>
+                                        </a>
+                                        <ul class="vertical__2dpt">
+                                            <li>
+                                                <a href="#">
+                                                    <i class="doca-arrow-right-s-fill"></i>
+                                                    이름
+                                                </a>
+                                            </li>
+                                            <li class="active">
+                                                <a href="#">
+                                                    <i class="doca-arrow-right-s-fill"></i>
+                                                    이름
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="active">
+                                        <a href="javaScript:void();">
+                                            <!-- <img src="assets/images/svg-icon/advanced.svg" class="img-fluid" alt="아이콘"> -->
+                                            <i class="doca-arrow-right-s-fill"></i> <span>모든파일</span></i>
+                                        </a>
+                                        <ul class="vertical__2dpt in">
+                                            <li>
+                                                <a href="#"><i class="doca-arrow-right-s-fill"></i>제안서</a>
+                                                <ul class="vertical__3dpt in">
+                                                    <li><a href="#"><i class="doca-arrow-right-s-fill"></i>제안서1</a></li>
+                                                    <li class="active"><a href="#"><i class="doca-arrow-right-s-fill"></i>제안서2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#"> <i class="doca-arrow-right-s-fill"></i>사업계획서</a>
+                                                <ul class="vertical__3dpt">
+                                                    <li><a href="#"><i class="doca-arrow-right-s-fill"></i>이름</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="javaScript:void();">
+                                            <i class="doca-arrow-right-s-fill"></i><span>삭제된 파일</span>
+                                        </a>
+                                        <ul class="vertical__2dpt in">
+                                            <li><a href="#">이름</a></li>
+                                            <li class="active"><a href="#">이름</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="storage__capacity">
+                                <h5>저장용량</h5>
+                                <div class="storage__capacity-progress">
+                                    <div class="storage__capacity-progress-bar" role="progressbar" data-valuenow="75"></div>
+                                </div>
+                                <span class="storage__info">15GB 중 100MB 사용</span>
+                                <button class="btn__doca btn__primary-border w-100">저장용량 구매</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Navigationbar -->
+                </div>
+                <!-- End Sidebar -->
+            </div>
+            <div class="main-contents">
+                <div class="main__header-top">
+                    <button class="btn__icon btn_left-toggle" title="메뉴접기" data-toggle="tooltip"><i class="doca-fold"></i></button>
+                </div>
+                <div class="contentbar">
+                    <div class="main__header">
+                        <h2>모든 파일</h2>
+                        <div class="btn__group">
+                            <button class="btn__icon" title="새로고침" data-toggle="tooltip"><i class="doca-refresh-line"></i></button>
+                            <div class="dropdown__box">
+                                <a class="btn__doca btn__default btn__dropdown" title="정렬" href="#none"><i class="doca-function-fill"></i><i class="doca-arrow-down-s-fill"></i></a>
+                                <!-- 버튼 클릭시 드롭박스 -->
+                                <ul class="dropdown__menu">
+                                    <li><a class="dropdown-item" href="javascript:void(0);" data-list="grid"><span>그리드</span><i class="doca-function-fill"></i></a></li>
+                                    <li><a class="dropdown-item" href="javascript:void(0);" data-list="list"><span>목룩</span><i class="doca-list-unordered"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="result.html" method="GET">
+                        <div class="search__bar">
+                            <input class="doca__search" type="text" placeholder="검색">
+                            <button class="btn__doca btn__primary" type="submit">검색</button>
+                            <button class="btn__doca btn__primary2" type="button" data-toggle="modal" data-target="#detailSearch">상세검색</button>
+                        </div>
+                    </form>
+                    <div class="search__results-buttons">
+                        <div class="btn__group">
+                            <button class="btn__doca btn__primary3" type="button">담기</button>
+                            <button class="btn__doca btn__gray-border" type="button">태그추가</button>
+                            <button class="btn__doca btn__gray-border" type="button">원본 다운로드</button>
+                            <button class="btn__doca btn__gray-border" type="button">미리보기</button>
+                        </div>
+
+                        <div class="search__results-filter ml-auto">
+                            <select class="btn__doca select2-single" name="state">
+                                <option value="1" selected>정확도 순</option>
+                                <option value="2">조회순</option>
+                                <option value="3">이름순</option>
+                            </select>
+                            <select class="btn__doca select2-single" name="state">
+                                <option value="10" selected>10개씩 출력</option>
+                                <option value="30">30개씩 출력</option>
+                                <option value="5">50개씩 출력</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="search__results-warp">
+                        <div class="search__results ">
+                            <div class="doca__card active">
+                                <div class="doca__card-header">
+                                    <label>
+                                        <input class="checkbox" name="card-checkbox" name="card-checkbox" type="checkbox" checked="checked">
+                                        <span class="control__check"></span>
+                                    </label>
+                                    <button title="더보기" class="btn__icon"><i class="doca-more-fill"></i></button>
+                                </div>
+                                <div class="doca__card-img">
+                                    <img src="https://picsum.photos/seed/picsum/200/300" alt="카드제목">
+                                </div>
+                                <div class="doca__card-details">
+                                    <h3 class="doca__card-title" title="업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건">업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건</h3>
+                                    <div class="tag__group">
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <div class="tag-more">+4</div>
+                                    </div>
+                                    <ul class="doca__card-info">
+                                        <li>
+                                            <label>생성일</label>
+                                            <span>2021-05-11 (23/47페이지)</span>
+                                        </li>
+                                        <li>
+                                            <label>출처</label>
+                                            <span>나윤주</span>
+                                        </li>
+                                    </ul>
+                                    <div class="doca__card-footer">
+                                        <button class="btn__doca btn__download">원본 다운로드</button>
+                                        <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i class="doca-search-line"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doca__card">
+                                <div class="doca__card-header">
+                                    <label>
+                                        <input class="checkbox" name="card-checkbox" type="checkbox">
+                                        <span class="control__check"></span>
+                                    </label>
+                                    <button title="더보기" class="btn__icon"><i class="doca-more-fill"></i></button>
+                                </div>
+                                <div class="doca__card-img">
+                                    <img src="./assets/images/main/sampleimg.png" alt="카드제목">
+                                </div>
+                                <div class="doca__card-details">
+                                    <h3 class="doca__card-title" title="업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건">업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건</h3>
+                                    <div class="tag__group">
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <div class="tag-more">+4</div>
+                                    </div>
+                                    <ul class="doca__card-info">
+                                        <li>
+                                            <label>생성일</label>
+                                            <span>2021-05-11 (23/47페이지)</span>
+                                        </li>
+                                        <li>
+                                            <label>출처</label>
+                                            <span>나윤주</span>
+                                        </li>
+                                    </ul>
+                                    <div class="doca__card-footer">
+                                        <button class="btn__doca btn__download">원본 다운로드</button>
+                                        <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i class="doca-search-line"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doca__card">
+                                <div class="doca__card-header">
+                                    <label>
+                                        <input class="checkbox" name="card-checkbox" type="checkbox">
+                                        <span class="control__check"></span>
+                                    </label>
+                                    <button title="더보기" class="btn__icon"><i class="doca-more-fill"></i></button>
+                                </div>
+                                <div class="doca__card-img">
+                                    <img src="./assets/images/main/sampleimg.png" alt="카드제목">
+                                </div>
+                                <div class="doca__card-details">
+                                    <h3 class="doca__card-title" title="업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건">업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건</h3>
+                                    <div class="tag__group">
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <div class="tag-more">+4</div>
+                                    </div>
+                                    <ul class="doca__card-info">
+                                        <li>
+                                            <label>생성일</label>
+                                            <span>2021-05-11 (23/47페이지)</span>
+                                        </li>
+                                        <li>
+                                            <label>출처</label>
+                                            <span>나윤주</span>
+                                        </li>
+                                    </ul>
+                                    <div class="doca__card-footer">
+                                        <button class="btn__doca btn__download">원본 다운로드</button>
+                                        <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i class="doca-search-line"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doca__card">
+                                <div class="doca__card-header">
+                                    <label>
+                                        <input class="checkbox" name="card-checkbox" type="checkbox">
+                                        <span class="control__check"></span>
+                                    </label>
+                                    <button title="더보기" class="btn__icon"><i class="doca-more-fill"></i></button>
+                                </div>
+                                <div class="doca__card-img">
+                                    <img src="./assets/images/main/sampleimg.png" alt="카드제목">
+                                </div>
+                                <div class="doca__card-details">
+                                    <h3 class="doca__card-title" title="업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건">업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건</h3>
+                                    <div class="tag__group">
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <div class="tag-more">+4</div>
+                                    </div>
+                                    <ul class="doca__card-info">
+                                        <li>
+                                            <label>생성일</label>
+                                            <span>2021-05-11 (23/47페이지)</span>
+                                        </li>
+                                        <li>
+                                            <label>출처</label>
+                                            <span>나윤주</span>
+                                        </li>
+                                    </ul>
+                                    <div class="doca__card-footer">
+                                        <button class="btn__doca btn__download">원본 다운로드</button>
+                                        <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i class="doca-search-line"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="doca__card">
+                                <div class="doca__card-header">
+                                    <label>
+                                        <input class="checkbox" name="card-checkbox" type="checkbox">
+                                        <span class="control__check"></span>
+                                    </label>
+                                    <button title="더보기" class="btn__icon"><i class="doca-more-fill"></i></button>
+                                </div>
+                                <div class="doca__card-img">
+                                    <img src="./assets/images/main/sampleimg.png" alt="카드제목">
+                                </div>
+                                <div class="doca__card-details">
+                                    <h3 class="doca__card-title" title="업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건">업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건</h3>
+                                    <div class="tag__group">
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <div class="tag-more">+4</div>
+                                    </div>
+                                    <ul class="doca__card-info">
+                                        <li>
+                                            <label>생성일</label>
+                                            <span>2021-05-11 (23/47페이지)</span>
+                                        </li>
+                                        <li>
+                                            <label>출처</label>
+                                            <span>나윤주</span>
+                                        </li>
+                                    </ul>
+                                    <div class="doca__card-footer">
+                                        <button class="btn__doca btn__download">원본 다운로드</button>
+                                        <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i class="doca-search-line"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footerbar">
+                            <footer class="footer">
+                                ⓒ 2020-2022 bubblecon corp.
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="aside-right">
+                <div class="doca__user-info">
+                    <div class="btn__group btn__align-right">
+                        <div>
+                            <button class="btn__icon btn__setting" title="세팅"><i class="doca-settings-3-fill"></i></button>
+                        </div>
+                        <div class="user-button">
+                            <button class="btn__icon btn__alram" title="알람"><i class="doca-notification-2-line"></i></button>
+                            <div class="user__alam-box menu__drop">
+                                <div class="user__alam-box-header">
+                                    <span class="title">
+                                        <i class="doca-notification-2-line"></i>
+                                        알림
+                                    </span>
+                                    <span><a href="#">전체 읽음</a></span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        인공지능 서비스에 오신 것을 환영합니다.<br>
+                                        이제 문서 검색 및 병합을 시작해보세요.
+                                    </li>
+                                    <li>
+                                        인공지능 서비스에 오신 것을 환영합니다.<br>
+                                        이제 문서 검색 및 병합을 시작해보세요.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="user-button">
+                            <button class="btn__user-info dflex"><span>버</span></button>
+                            <ul class="user__menu-drop menu__drop">
+                                <li>
+                                    <div class="user__menu-item dflex">
+                                        <div class="user__profile-img">
+                                            <span>버</span>
+                                        </div>
+                                        <div class="user__profile-info">
+                                            <span>버블콘</span>
+                                            <span>bbc@bubbleco.io</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text__gray">계정 용량이 15GB입니다.</p>
+                                        <button class="btn__upgrade">업그레이드</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="user__menu-item"><a href="#">설정</a></div>
+                                    <div class="user__menu-item"><a href="#">로그아웃</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="doca__detail">
+                    <div class="doca__detail-header">
+                        <h4 class="doca__detail-title">업무 및 정보기술 요건분석</h4>
+                        <button class="btn__icon btn__minsize" id="rightTabToggle" title="세부내용접기" data-toggle="tooltip" data-placement="left"><i class="doca-close-tab"></i></button>
+                    </div>
+                    <div class="doca__detail-warp">
+                        <h5 class="doca__detail-sub-title">기본정보</h5>
+                        <div class="doca__card-img">
+                            <img src="https://picsum.photos/seed/picsum/200/300" alt="카드제목">
+                        </div>
+                        <ul class="doca__detail-info">
+                            <li>
+                                <label>생성일</label>
+                                <span>2021-05-11 (23/47페이지)</span>
+                            </li>
+                            <li>
+                                <label>출처</label>
+                                <span>나윤주</span>
+                            </li>
+                        </ul>
+                        <div class="btn__group btn-column">
+                            <button class="btn__doca btn__gray-border">원본 다운로드</button>
+                            <button class="btn__doca btn__gray-border">미리보기</button>
+                        </div>
+
+                        <h5 class="doca__detail-sub-title">AI 유사 키워드 20</h5>
+                        <ul class="keyword__group">
+                            <li><a href="#none" class="btn__keyword on">수립</a></li>
+                            <li><a href="#none" class="btn__keyword">프로토타입</a></li>
+                            <li><a href="#none" class="btn__keyword">보완</a></li>
+                            <li><a href="#none" class="btn__keyword">설계</a></li>
+                            <li><a href="#none" class="btn__keyword">간편</a></li>
+                            <li><a href="#none" class="btn__keyword">베스트</a></li>
+                        </ul>
+
+                        <h5 class="doca__detail-sub-title">태그정보</h5>
+                        <div class="doca__detail-tags">
+                            <span class="tag">시각</span>
+                            <span class="tag">시각</span>
+                            <span class="tag">시각</span>
+                            <span class="tag">시각</span>
+                            <span class="tag">시각</span>
+                            <span class="tag">시각</span>
+                        </div>
+
+                        <h5 class="doca__detail-sub-title">세부 정보 추가</h5>
+                        <input class="input__file-info" placeholder="여기에 이 파일에  대한 세부 정보를 추가하세요.">
+                    </div>
+                </div>
+                <div class="doca__min-detail-bar">
+                    <button class="btn__icon btn__expanded" id="rightTabToggleOpen" title="세부내용펼치기" data-toggle="tooltip" data-placement="left"><i class="doca-open-tab"></i></button>
+                    <button class="btn__icon btn__alram" title="알람"><i class="doca-notification-2-line"></i></button>
+                    <button class="btn__icon btn__setting" title="세팅" data-toggle="tooltip"><i class="doca-settings-3-fill"></i></button>
+                </div>
+            </div>
+        </div>
+
+
+
+    <!-- 상세검색 모달 -->
+    <div class="doca__modal" id="detailSearch">
+        <div class="doca__modal-content">
+            <div class="doca__modal-header">
+                <span><i class="doca-search-line"></i> 모든 파일 상세 검색</span>
+                <button class="btn__white" data-dismiss="modal"><i class="doca-close-fill"></i></button>
+            </div>
+            <div class="doca__modal-body">
+                <form action="" method="GET">
+                    <ul class="search__form">
+                        <li>
+                            <div class="input__group">
+                                <label class="title">파일 형식</label>
+                                <select class="btn__doca select2-single" name="state">
+                                    <option value="1">PPTX</option>
+                                    <option value="2">PPTX</option>
+                                    <option value="3">PPTX</option>
+                                </select>
+                            </div>
+                            <div class="input__group">
+                                <label class="title text-right text-sm-left">검색 영역</label>
+                                <div class="check__group">
+                                    <label>
+                                        <input class="" name="card-checkbox" type="checkbox" checked="checked">
+                                        <!-- <span class="control__check"></span> -->
+                                        전체
+                                    </label>
+                                    <label>
+                                        <input type="checkbox">
+                                        제목
+                                    </label>
+                                    <label>
+                                        <input type="checkbox">
+                                        설명
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input__group-column">
+                                <div class="input__group">
+                                    <label class="title">상세 검색</label>
+                                    <select class="btn__doca select2-single" name="state">
+                                        <option value="1">제목</option>
+                                        <option value="2">PPTX</option>
+                                        <option value="3">PPTX</option>
+                                    </select>
+                                    <input type="text" placeholder="내용을 입력하세요." class="form__control">
+                                </div>
+                                <div class="input__group">
+                                    <label class="title"></label>
+                                    <select class="btn__doca select2-single" name="state">
+                                        <option value="1">설명</option>
+                                        <option value="2">PPTX</option>
+                                        <option value="3">PPTX</option>
+                                    </select>
+                                    <input type="text" placeholder="내용을 입력하세요." class="form__control">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input__group">
+                                <label class="title">태그 검색</label>
+                                <div class="input__group-column">
+                                    <input type="text" placeholder="#로 구분해 태그를 작성해 주세요." class="form__control">
+                                    <div class="doca__detail-tags tags__edit">
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                        <span class="tag">시각</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input__group">
+                                <label class="title">출처</label>
+                                <input type="text" placeholder="출처를 입력하세요." class="form__control">
+                            </div>
+                            <div class="input__group">
+                                <label class="title text-right text-sm-left">생성일</label>
+                                <select class="btn__doca select2-single" name="state">
+                                    <option value="1">전체</option>
+                                    <option value="2">일주일</option>
+                                    <option value="3">1주일</option>
+                                    <option value="3">1개월</option>
+                                    <option value="3">3개월</option>
+                                    <option value="3">6개월</option>
+                                    <option value="3">직접입력</option>
+                                </select>
+                                <input type="text" placeholder="YYYY-MM-DD" class="form__control" style="width:120px">
+                                <span>~</span>
+                                <input type="text" placeholder="YYYY-MM-DD" class="form__control" style="width:120px">
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="doca__modal-footer">
+                <button type="button" class="btn__doca btn__gray-border"><i class="doca-refresh-line"></i>초기화</button>
+                <button type="submit" class="btn__doca btn__primary2">상세검색</button>
+            </div>
+        </div>
+    </div>
+    <!-- Start js -->
+    <script src="assets/js/common/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script> -->
+    <script src="assets/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="assets/js/common/popper.min.js"></script>
+    <script src="assets/js/plugins/select2/select2.min.js"></script>
+
+    <script src="assets/js/custom/custom-form-select.js"></script>
+    <!-- Core js -->
+    <script src="assets/js/common/core.js"></script>
+</body>
+</html>
