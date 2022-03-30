@@ -680,7 +680,7 @@ a.btn__dropdown:hover,a.btn__dropdown:active,a.btn__dropdown:focus {
 .doca__card .doca__card-img{
   overflow: hidden;
 }
-.doca__card-img:hover img{
+.doca__card .doca__card-img:hover img{
   transform: scale(1.2);
 }
 .doca__card.active .doca__card-header{
