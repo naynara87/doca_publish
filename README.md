@@ -1,5 +1,8 @@
 # DOCA 세팅
 
+## 샘플 미리보기
+주소: (https://naynara87.github.io/doca_publish/)
+
 ## 퍼블리싱 시작 ( 2022.2.80 )
 작성자: 나윤주<br>
 작성일:2022.03.5
