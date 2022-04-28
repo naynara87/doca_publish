@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        //10진수 -> 2진수/16진수
+        let num = 10;
+        num.toString(); // "10"
+        num.toString(2); // "1010"
+
+        let num2 = 255;
+        num2.toString(16); // "ff"
+
+        
+        Math.PI;
+        Math.ceil();
+        Math.floor();
+        Math.round();
+
+        //소수점 자릿수
+
+        let userRate = 30.1234;
+        //요구사항:소수점 둘쨰자리까지 표현(셋째 자리에서 반올림) 30.12
+        Math.round(userRate * 100)/100 // 30.12
+        userRate.toFixed(2);
+        //30.12
+        userRate.toFixed(0); //30
+        userRate.toFixed(6); //30.123400 (문자열로 반응)
+        Number(userRate.toFixed(2)); //30.12 (숫자열로 변환)
+
+
+        let x = Number('x'); //NaN
+        isNaN(x)//true
+        isNaN(3)//falsey
+
+        let margin ='10px';
+        parseInt(margin); //10 (문자열을 숫자로 변경, 문자가 혼용되어도 동작o)
+        Number(margin); //NaN (문자열을 숫자로 변경, 문자가 혼용되어도 동작x)
+
+        let redColor ='f3';
+        parseInt(redColor); //NaN (숫자로 시작해야함-)
+        parseInt(redColor, 16); //243
+
+        parseInt('11', 2) //2
+
+        parseFloat()
+        
+        let padding = '18.5%';
+        parseInt(padding); //18 (숫자로 변환 정수만)
+        parseFloat(padding); //18.5 (소숫점까지 반환)
+
+        Math.random() //0~1사이 무작위 숫자 생성
+        // 1-100 사이 임의의 숫자를 뽑고 싶다면?
+
+        Math.floor(Math.random()*100)+1
+        
+        Math.max()
+        Math.min()
+
+        Math.max(1,4,-1,5,10,9,5.54); // 10
+        Math.min(1,4,-1,5,10,9,5.54); // -1
+
+        Math.abs() //:절대값
+        Math.abs(-1) //1
+
+        Math.pow(n,m) //:제곱
+        Math.pow(2,10); //1024
+
+        Math.sqrt() //:제곱근
+        Math.sqrt(16) //4
+
+        let desc = "Hi guys. Nice to meet you";
+        desc.toUpperCase();//"HI GUYS. NICE TO MEET YOU."
+        desc.toLowerCase();//"hi guys. nice to meet you."
+
+        desc.indexOf('to');//14
+
+        if(desc.indexOf('Hi') > -1){
+            console.log('Hi가 포함된 문장입니다.')
+        }
+        
+        str.slice(n, m)//n: 시작점, m: 없으면 문자열 끝까지 양수면 그 숫자까지 음수면 끝에서부터 셈
+        let desc2 = "abcdefg";
+
+        desc2.slice(2) //"cdefg"
+        desc2.slice(0,5) //"abcde"
+        desc2.slice(2,-2) //"cde"
+
+        str.substring(n,m) // n과 m사이 문자열 반환 / n과 m을 바꿔도 동작함 / 음수 허용 x 0으로 인식
+        let desc3 = "abcdefg";
+
+        desc3.substring(2,5); //"cde"
+        desc3.substring(5,2); //"cde"
+
+        str.substr(n,m) // n부터 시작 m개를 가져옴
+        desc.substr(2,4) //"cdef"
+        desc.substr(-4,2) //"de"
+        
+        str.trim() //앞 뒤 공백 제거
+        let desc4 = " coding      ";
+        desc4.trim(); //"coding"
+
+        str.repeat(n) //: n번 반복
+        let hello = "hello!";
+        hello.repeat(3); "hello!hello!hello!hello!"
+
+        //문자열 비교
+        "a".codePointAt(0); //97
+        string.fromCodePoint(97) //"a"
+    
+
+        //ex) 텍스트만 배열
+        let list = [
+            "01. 들어가며",
+            "02. JS 역사",
+            "03. 자료형",
+            "04. 함수",
+            "05. 배열",
+        ]
+
+        let newList = [];
+        
+        for(let i = 0; i<list.length; i++) {
+            newList.push(list[i].slice(4));
+        }
+
+        console.log(newList);
+
+        //ex) 금칙어: 콜라
+        function hasCola(str){
+            if(str.includes("콜라")){
+                console.log("금칙어가 있습니다.");
+            }else{
+                console.log("통과")
+            }
+        }
+        hasCola("와, 사이다가 짱이야."); //통과
+        hasCola("무슨소리, 콜라가 최고"); //금칙어가 있습니다.
+        hasCola("콜라"); //금칙어가 있습니다.
+
+        arr.splice(n,m) //:특정 요소 지움 n:시작, m:개수
+        let arr = [1,2,3,4,5];
+        arr.splice(1,2); //[1,4,5]
+        
+        arr.splice(n,m,x) //:특정 요소 지우고 추가 
+        arr.splice(1,3,100,200);
+        console.log(arr);//[1,100,200,5]
+
+        let arr2= ["나는","철수","입니다."];
+        arr2.splice(1,0,"대한민국","소방관");
+        //결과: ["나는","대한민국","소방관","철수","입니다."]
+
+        arr.splice() //삭제된 요소 반환 / n부터 m까지 반환
+        let result = arr.splice(1,2);
+        console.log(arr); //[1,4,5]
+        console.log(result); //[2,3]
+
+        
+        arr.slice(n,m) //:n부터 m까지 반환
+        let arr3 = [1,2,3,4,5];
+        arr.slice(1,4) // [2,3,4]
+
+        arr.concat(arr2,arr3...) //:합쳐서 새배열 반환
+        let arr4 = [1,2];
+        arr4.concat([3,4]); //[1,2,3,4]
+        arr4.concat([3,4],[5,6]); //[1,2,3,4,5,6]
+
+        arr.forEach(fn)//:배열 반복
+        let users = ['Mike','Tom','Jane'];
+        users.forEach((item, index, arr) =>{
+            //item: Mike,Tom, Jane
+            //index: 0,1,2
+            //arr: users
+            console.log(`${index + 1}. ${name}`);  //1. Mice 2. Tom 3. Jane
+        })
+        arr.indexOf();
+        arr.lastIndexOf();
+        let arr5 = [1,2,3,4,5,1,2,3];
+        arr5.indexOf(3); //2 (앞에서 부터 탐색! 인덱스2)
+        arr5.indexOf(3,3) //7 (3부터 시작!)
+        arr5.lastIndexOf(3) //7 (끝에서부터 탐색! 인덱스7)
+        
+        arr.includes() //:포함하는지 확인
+        let arr6 = [1,2,3];
+        arr.includes(2);//true;
+        arr.includes(8);//false;
+
+        arr.find(fn);
+        arr.findIndex(fn);
+
+        const result2 = arr5.find((item) => {
+            return item % 2 === 0;
+        });
+        console.log(result2); //2
+        
+        let userList = [
+            { name: "Mike", age: 30 },
+            { name: "Jane", age: 27 },
+            { name: "Tom", age: 10 },
+        ];
+
+        const result3 = userList.find((user) => {
+            if(user.age < 19){
+                return true;
+            }
+            return false;
+        });
+        console.log(result3); //name: "Tom", age: 10
+        //find 하나만 찾아줌
+
+        const result4 = arr5.filter((item) => {
+            return item % 2 === 0;
+        });
+        console.log(result4); //[2,4,6] 짝수배열
+
+        arr.reverse() //:역순 재정렬
+
+        //arr.map()
+        let newUserList = userList.map((user, index) => {
+            return Object.assign({}, user, {
+                id: index + 1,
+                isAdult: user.age > 19,
+            })
+        })
+
+        console.log(newUserList);
+
+        Object.assign()//:객체복제
+
+        //join
+        let arr7 = ["안녕", "나는", "철수야"];
+        let result7 = arr.join("-");
+
+        console.log(result); //안녕-나는-철수야
+
+        //split
+        const users8 = "Mike,Jane,Tom,Tony";
+        const result8 = users.split(",");
+
+        console.log(result8); //["Mike","Jane","Tom","Tony"]
+
+        //Array.isArray();
+        let user = {
+            name:"Mike",
+            age: 30
+        };
+
+        let userList2 = ["Mike","Tom","Jane"];
+
+    </script>
+</body>
+</html>

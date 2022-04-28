@@ -116,26 +116,8 @@ $(document).ready(function () {
     //상세버튼 모달창 열기
 
 
-    //드롭다운 클릭시 메뉴 show
-    var btnDropdown = $(".btn__dropdown");
-    var dropdownMenu = $('.dropdown__menu');
-    var dropdownMenuLi = $('.dropdown__menu > li > a');
-    var searchResults = $('.search__results');
-    var dropdownShow;
-    btnDropdown.click(function(e) {
-        if(dropdownShow == "true"){
-            dropdownShow = "false";
-            $(this).next().removeClass('show');
-            console.log(dropdownShow,'숨겨라')
-        }else{
-            dropdownShow = "true";
-            $(this).next().addClass('show');
-            console.log(dropdownShow,'보여라')
-        }
-    })
-    //특정영역 이외 클릭시 드롭다운 hide
-    
-    
+    //카드 리스트 토글버튼
+    var gridOptionButton = $('.grid__option-button > button');
     //드롭다운 메뉴 클리시 아이콘 변경 및 그리드 스타일 변경
     var gridViewHtml = `
     <div class="col__card">
@@ -369,20 +351,19 @@ $(document).ready(function () {
     </table>
     `
     
-    dropdownMenuLi.click(function (e) {
+    gridOptionButton.click(function (e) {
         dropdownShow = "false";
-        dropdownMenu.removeClass('show');
+        $(this).addClass('on');
+        $(this).siblings().removeClass('on');
         var listStyle = $(this).data("list");
         
         switch (listStyle) {
             case "grid":
-                btnDropdown.html('<i class="doca-function-fill"></i><i class="doca-arrow-down-s-fill"></i>');
                 searchResults.addClass('doca__grid-veiw');
                 searchResults.removeClass('doca__list-veiw');
                 searchResults.html(gridViewHtml);
                 break;
             case "list":
-                btnDropdown.html('<i class="doca-list-unordered"></i><i class="doca-arrow-down-s-fill"></i>');
                 searchResults.addClass('doca__list-veiw');
                 searchResults.removeClass('doca__grid-veiw');
                 searchResults.html(listViewHtml);

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <title>DOCA</title>
     <!-- Fevicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/fontello.css" />
     <!-- plugin css -->
     <!-- <link rel="stylesheet" type="text/css" href="assets/js/plugins/jquery-ui/jquery-ui.min.css"> -->
@@ -26,30 +26,38 @@
     <div id="containerbar">
         <div class="leftbar hide-on-mobile">
             <div class="logobar">
-                <a href="index.html" class="logo logo-large">
-                    <img src="./assets/images/common/logo.png" class="img__fluid" alt="logo">
+                <a href="index.html" class="logo">
+                    <img src="./assets/images/common/logo.svg" class="img__fluid logo-l" alt="logo">
+                    <img src="./assets/images/common/logo-icon.svg" class="img__fluid logo-m" alt="logo-icon">
                 </a>
             </div>
-            <div class="tab__wrapper">
-                <button class="btn__filemanage">파일관리</button>
-            </div>
+            <!-- left minsize -->
             <div class="vertical__menu__detail">
+                <div class="menu-fold-wrap">
+                    <button class="btn__icon btn__white btn_left-toggle"><i class="doca-fold"></i></button>
+                </div>
                 <div class="tab__content">
                     <ul class="vertical__menu">
                         <li>
                             <a href="javaScript:void();">
                                 <!-- <img src="assets/images/svg-icon/basic.svg" class="img-fluid" alt="아이콘"> -->
-                                <i class="doca-arrow-right-s-fill"></i> <span>병합파일</span>
+                                <i class="doca-refresh-line"></i><span>파일관리 <i></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javaScript:void();">
+                                <!-- <img src="assets/images/svg-icon/basic.svg" class="img-fluid" alt="아이콘"> -->
+                                <i class="doca-refresh-line"></i><span>병합파일 <i class="doca-arrow-right-s-fill"></i></span>
                             </a>
                             <ul class="vertical__2dpt">
                                 <li>
                                     <a href="#">
-                                        이름
+                                        <span>이름</span>
                                     </a>
                                 </li>
                                 <li class="active">
                                     <a href="#">
-                                        이름
+                                        <span>이름</span>
                                     </a>
                                 </li>
                             </ul>
@@ -57,11 +65,11 @@
                         <li>
                             <a href="javaScript:void();">
                                 <!-- <img src="assets/images/svg-icon/advanced.svg" class="img-fluid" alt="아이콘"> -->
-                                <i class="doca-arrow-right-s-fill"></i> <span>모든파일</span></i>
+                                <i class="doca-refresh-line"></i> <span>모든파일 <i class="doca-arrow-right-s-fill"></i></span></i>
                             </a>
                             <ul class="vertical__2dpt">
                                 <li>
-                                    <a href="#"><i class="doca-arrow-right-s-fill"></i>제안서</a>
+                                    <a href="#"><span>제안서 <i class="doca-arrow-right-s-fill"></i></span></a>
                                     <ul class="vertical__3dpt">
                                         <li><a href="#">제안서</a></li>
                                         <li><a href="#">제안서</a></li>
@@ -79,86 +87,140 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#"> <i class="doca-arrow-right-s-fill"></i>사업계획서</a>
+                                    <a href="#"><span>사업계획서 <i class="doca-arrow-right-s-fill"></i></span></a>
                                     <ul class="vertical__3dpt">
-                                        <li><a href="#"><i class="doca-arrow-right-s-fill"></i>이름</a></li>
+                                        <li><span><a href="#">이름</a></span></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li>
                             <a href="javaScript:void();">
-                                <i class="doca-arrow-right-s-fill"></i><span>삭제된 파일</span>
+                                <i class="doca-refresh-line"></i><span>삭제된 파일 <i class="doca-arrow-right-s-fill"></i></span>
                             </a>
                             <ul class="vertical__2dpt in">
-                                <li><a href="#">이름</a></li>
-                                <li class="active"><a href="#">이름</a></li>
+                                <li><a href="#"><span>이름</span></a></li>
+                                <li class="active"><a href="#"><span>이름</span></a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="storage__capacity">
-                <h5>저장용량</h5>
-                <div class="storage__capacity-progress">
-                    <div class="storage__capacity-progress-bar" role="progressbar" data-valuenow="75"></div>
+                <div class="storage__capacity">
+                    <div class="storage__capacity-wrap">
+                        <div class="storage__capacity-progress">
+                            <div class="storage__capacity-progress-bar" role="progressbar" data-valuenow="75"></div>
+                        </div>
+                        <span class="storage__info">30GB 중 <span>25.32GB</span> 사용</span>
+                        <button class="btn__doca btn__white-border w-100 doca-rounded-pill">저장용량 구매</button>
+                    </div>
                 </div>
-                <span class="storage__info">15GB 중 100MB 사용</span>
-                <button class="btn__doca btn__primary-border w-100">저장용량 구매</button>
             </div>
         </div>
         <div class="main-contents">
             <div class="main__header-top">
-                <button class="btn__icon btn_left-toggle" title="메뉴접기" data-toggle="tooltip"><i
-                        class="doca-fold"></i></button>
             </div>
             <div class="contentbar">
                 <div class="main__header">
-                    <h2>모든 파일</h2>
-                    <div class="btn__group">
+                    <h2 style="display: flex; gap:15px; align-content: center;"><img src="./assets/images/icon/doca_folder.svg" style="width:25px">모든 파일 <span>></span> <strong>제안서2</strong></h2>
+                    <div class="btn__group btn__align-right">
+                        <div>
+                            <button class="btn__icon btn__setting" title="세팅"><i class="doca-settings-3-fill"></i></button>
+                        </div>
+                        <div class="user-button">
+                            <button class="btn__icon btn__alram" title="알람"><i class="doca-notification-2-line"></i></button>
+                            <div class="user__alam-box menu__drop">
+                                <div class="user__alam-box-header">
+                                    <span class="title">
+                                        <i class="doca-notification-2-line"></i>
+                                        알림
+                                    </span>
+                                    <span><a href="#">전체 읽음</a></span>
+                                </div>
+                                <ul>
+                                    <li>
+                                        인공지능 서비스에 오신 것을 환영합니다.<br>
+                                        이제 문서 검색 및 병합을 시작해보세요.
+                                    </li>
+                                    <li>
+                                        인공지능 서비스에 오신 것을 환영합니다.<br>
+                                        이제 문서 검색 및 병합을 시작해보세요.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="user-button">
+                            <button class="btn__user-info dflex"><span>버</span></button>
+                            <ul class="user__menu-drop menu__drop">
+                                <li>
+                                    <div class="user__menu-item dflex">
+                                        <div class="user__profile-img">
+                                            <span>버</span>
+                                        </div>
+                                        <div class="user__profile-info">
+                                            <span>버블콘</span>
+                                            <span>bbc@bubbleco.io</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text__gray">계정 용량이 15GB입니다.</p>
+                                        <button class="btn__upgrade">업그레이드</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="user__menu-item"><a href="#">설정</a></div>
+                                    <div class="user__menu-item"><a href="#">로그아웃</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- <div class="btn__group">
                         <button class="btn__icon" title="새로고침" data-toggle="tooltip"><i
                                 class="doca-refresh-line"></i></button>
                         <div class="dropdown__box">
                             <a class="btn__doca btn__default btn__dropdown" title="정렬" href="#none"><i
                                     class="doca-function-fill"></i><i class="doca-arrow-down-s-fill"></i></a>
                             <!-- 버튼 클릭시 드롭박스 -->
-                            <ul class="dropdown__menu">
+                            <!-- <ul class="dropdown__menu">
                                 <li><a class="dropdown-item" href="javascript:void(0);"
                                         data-list="grid"><span>그리드</span><i class="doca-function-fill"></i></a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0);"
                                         data-list="list"><span>목룩</span><i class="doca-list-unordered"></i></a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-                <form action="result.html" method="GET">
+                <form action="" method="GET">
                     <div class="search__bar">
-                        <input class="doca__search" type="text" placeholder="검색">
-                        <button class="btn__doca btn__primary" type="submit">검색</button>
-                        <button class="btn__doca btn__primary2" type="button" data-toggle="modal"
+                        <div class="input__group mr-1">
+                            <input class="" type="text" placeholder="검색">
+                            <button class="btn__doca" type="submit"><i class="doca-search-line"></i></button>
+                        </div>
+                        <button class="btn__doca btn__primary doca-rounded-pill" type="button" data-toggle="modal"
                             data-target="#detailSearch">상세검색</button>
                     </div>
                 </form>
             </div>
             <div class="search__results-buttons">
                 <div class="btn__group">
-                    <button class="btn__doca btn__primary3" type="button">담기</button>
-                    <button class="btn__doca btn__gray-border" type="button">태그추가</button>
-                    <button class="btn__doca btn__gray-border" type="button">원본 다운로드</button>
-                    <button class="btn__doca btn__gray-border" type="button">미리보기</button>
-                </div>
-
-                <div class="search__results-filter ml-auto">
-                    <select class="btn__doca select2-single" name="state">
+                    <button class="btn__doca btn__primary doca-rounded-pill" type="button">담기</button>
+                    <button class="btn__doca btn__secondary doca-rounded-pill" type="button">미리보기</button>
+                    <select class="btn__doca btn__secondary doca-rounded-pill" name="state">
                         <option value="1" selected>정확도 순</option>
                         <option value="2">조회순</option>
                         <option value="3">이름순</option>
                     </select>
-                    <select class="btn__doca select2-single" name="state">
+                    <select class="btn__doca btn__secondary doca-rounded-pill" name="state">
                         <option value="10" selected>10개씩 출력</option>
                         <option value="30">30개씩 출력</option>
                         <option value="5">50개씩 출력</option>
                     </select>
+                </div>
+                <div class="ml-auto btn__group">
+                    <button class="btn__icon-lg"><i class="doca-refresh-line"></i></button>
+                    <div class="grid__option-button">
+                        <button class="btn__icon-lg" data-list="list"><i class="doca-list-unordered"></i></button>
+                        <button class="on btn__icon-lg" data-list="grid"><i class="doca-function-fill"></i></button>
+                    </div>
                 </div>
             </div>
             <div class="search__results-warp">
@@ -197,8 +259,44 @@
                                 </ul>
                                 <div class="doca__card-footer">
                                     <button class="btn__doca btn__download">원본 다운로드</button>
-                                    <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i
-                                            class="doca-search-line"></i></button>
+                                    <button class="btn__doca btn__search">미리보기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col__card">
+                        <div class="doca__card">
+                            <div class="doca__card-header">
+                                <label>
+                                    <input class="checkbox" name="card-checkbox" type="checkbox">
+                                    <span class="control__check"></span>
+                                </label>
+                                <button title="더보기" class="btn__icon"><i class="doca-more-fill"></i></button>
+                            </div>
+                            <div class="doca__card-img">
+                                <img src="./assets/images/main/sampleimg.png" alt="카드제목">
+                            </div>
+                            <div class="doca__card-details">
+                                <h3 class="doca__card-title" title="업무 및 정보기술 요건업무">업무 및 정보기술 요건업무</h3>
+                                <div class="tag__group">
+                                    <span class="tag">시각</span>
+                                    <span class="tag">시각</span>
+                                    <span class="tag">시각</span>
+                                    <div class="tag-more">+4</div>
+                                </div>
+                                <ul class="doca__card-info">
+                                    <li>
+                                        <label>생성일</label>
+                                        <span>2021-05-11 (23/47페이지)</span>
+                                    </li>
+                                    <li>
+                                        <label>출처</label>
+                                        <span>나윤주</span>
+                                    </li>
+                                </ul>
+                                <div class="doca__card-footer">
+                                    <button class="btn__doca btn__download">원본 다운로드</button>
+                                    <button class="btn__doca btn__search">미리보기</button>
                                 </div>
                             </div>
                         </div>
@@ -236,8 +334,7 @@
                                 </ul>
                                 <div class="doca__card-footer">
                                     <button class="btn__doca btn__download">원본 다운로드</button>
-                                    <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i
-                                            class="doca-search-line"></i></button>
+                                    <button class="btn__doca btn__search">미리보기</button>
                                 </div>
                             </div>
                         </div>
@@ -275,8 +372,7 @@
                                 </ul>
                                 <div class="doca__card-footer">
                                     <button class="btn__doca btn__download">원본 다운로드</button>
-                                    <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i
-                                            class="doca-search-line"></i></button>
+                                    <button class="btn__doca btn__search">미리보기</button>
                                 </div>
                             </div>
                         </div>
@@ -314,47 +410,7 @@
                                 </ul>
                                 <div class="doca__card-footer">
                                     <button class="btn__doca btn__download">원본 다운로드</button>
-                                    <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i
-                                            class="doca-search-line"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col__card">
-                        <div class="doca__card">
-                            <div class="doca__card-header">
-                                <label>
-                                    <input class="checkbox" name="card-checkbox" type="checkbox">
-                                    <span class="control__check"></span>
-                                </label>
-                                <button title="더보기" class="btn__icon"><i class="doca-more-fill"></i></button>
-                            </div>
-                            <div class="doca__card-img">
-                                <img src="./assets/images/main/sampleimg.png" alt="카드제목">
-                            </div>
-                            <div class="doca__card-details">
-                                <h3 class="doca__card-title" title="업무 및 정보기술 요건업무 및 정보기술 요건업무 및 정보기술 요건">업무 및 정보기술 요건업무
-                                    및 정보기술 요건업무 및 정보기술 요건</h3>
-                                <div class="tag__group">
-                                    <span class="tag">시각</span>
-                                    <span class="tag">시각</span>
-                                    <span class="tag">시각</span>
-                                    <div class="tag-more">+4</div>
-                                </div>
-                                <ul class="doca__card-info">
-                                    <li>
-                                        <label>생성일</label>
-                                        <span>2021-05-11 (23/47페이지)</span>
-                                    </li>
-                                    <li>
-                                        <label>출처</label>
-                                        <span>나윤주</span>
-                                    </li>
-                                </ul>
-                                <div class="doca__card-footer">
-                                    <button class="btn__doca btn__download">원본 다운로드</button>
-                                    <button class="btn__icon btn__search" title="미리보기" data-toggle="tooltip"><i
-                                            class="doca-search-line"></i></button>
+                                    <button class="btn__doca btn__search">미리보기</button>
                                 </div>
                             </div>
                         </div>
@@ -369,71 +425,20 @@
 
         </div>
         <div class="aside-right">
-            <div class="doca__user-info">
-                <div class="btn__group btn__align-right">
-                    <div>
-                        <button class="btn__icon btn__setting" title="세팅"><i class="doca-settings-3-fill"></i></button>
-                    </div>
-                    <div class="user-button">
-                        <button class="btn__icon btn__alram" title="알람"><i
-                                class="doca-notification-2-line"></i></button>
-                        <div class="user__alam-box menu__drop">
-                            <div class="user__alam-box-header">
-                                <span class="title">
-                                    <i class="doca-notification-2-line"></i>
-                                    알림
-                                </span>
-                                <span><a href="#">전체 읽음</a></span>
-                            </div>
-                            <ul>
-                                <li>
-                                    인공지능 서비스에 오신 것을 환영합니다.<br>
-                                    이제 문서 검색 및 병합을 시작해보세요.
-                                </li>
-                                <li>
-                                    인공지능 서비스에 오신 것을 환영합니다.<br>
-                                    이제 문서 검색 및 병합을 시작해보세요.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="user-button">
-                        <button class="btn__user-info dflex"><span>버</span></button>
-                        <ul class="user__menu-drop menu__drop">
-                            <li>
-                                <div class="user__menu-item dflex">
-                                    <div class="user__profile-img">
-                                        <span>버</span>
-                                    </div>
-                                    <div class="user__profile-info">
-                                        <span>버블콘</span>
-                                        <span>bbc@bubbleco.io</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p class="text__gray">계정 용량이 15GB입니다.</p>
-                                    <button class="btn__upgrade">업그레이드</button>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="user__menu-item"><a href="#">설정</a></div>
-                                <div class="user__menu-item"><a href="#">로그아웃</a></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <div class="doca__detail-header">
-                <h4 class="doca__detail-title">업무 및 정보기술 요건분석</h4>
+                <h4 class="doca__detail-title">기본정보</h4>
                 <button class="btn__icon btn__minsize" id="rightTabToggle" title="세부내용접기" data-toggle="tooltip"
                     data-placement="left"><i class="doca-close-tab"></i></button>
             </div>
             <div class="doca__detail">
-                <h5 class="doca__detail-sub-title">기본정보</h5>
                 <div class="doca__card-img">
                     <img src="https://picsum.photos/seed/picsum/200/300" alt="카드제목">
                 </div>
                 <ul class="doca__detail-info">
+                    <li>
+                        <label>파일명</label>
+                        <span>업무 및 정보기술 요건 분석 프로젝트 안내서</span>
+                    </li>
                     <li>
                         <label>생성일</label>
                         <span>2021-05-11 (23/47페이지)</span>
@@ -444,8 +449,7 @@
                     </li>
                 </ul>
                 <div class="btn__group btn-column">
-                    <button class="btn__doca btn__gray-border">원본 다운로드</button>
-                    <button class="btn__doca btn__gray-border">미리보기</button>
+                    <button class="btn__doca btn__gray-border doca-rounded-pill">미리보기</button>
                 </div>
 
                 <h5 class="doca__detail-sub-title">AI 유사 키워드 20</h5>
